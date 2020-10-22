@@ -1,26 +1,27 @@
 const path = require('path');
 
 module.exports = {
-  entry: './src/index.jsx',
+  entry: './src/index.js',
   output: {
     path: path.join(__dirname, 'dist'),
-    filename: 'bundle.js'
+    filename: 'bundle.js',
+  },
+  devServer: {
+    contentBase: path.join(__dirname, 'dist'),
+    writeToDisk: true,
   },
   module: {
     rules: [
       {
-        test: /\.jsx?$/,
+        test: /\.js$/,
         loader: 'babel-loader',
         query: {
-          presets: [
-            '@babel/preset-env',
-            '@babel/preset-react',
-          ],
+          presets: ['@babel/preset-env'],
         },
       },
       {
         test: /\.css$/,
-        use: ['style-loader', 'css-loader']
+        use: ['style-loader', 'css-loader'],
       },
       {
         test: /\.(png|jpe?g|svg)$/,
@@ -29,10 +30,10 @@ module.exports = {
             loader: 'file-loader',
             options: {
               name: '[name]-[hash:6].[ext]',
-              outputPath: 'img'
-            }
-          }
-        ]
+              outputPath: 'img',
+            },
+          },
+        ],
       },
       {
         test: /\.html$/,
@@ -41,10 +42,10 @@ module.exports = {
             loader: 'file-loader',
             options: {
               name: '[name].[ext]',
-            }
-          }
-        ]
-      }
-    ]
-  }
-}
+            },
+          },
+        ],
+      },
+    ],
+  },
+};
